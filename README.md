@@ -1,6 +1,5 @@
-# pico-weather
-Weather station for Raspberry Pi Pico
-
+#Pico-Weather
+Weather station for Raspberry Pi Pico.
 
 
 Software for the Raspberry Pi Pico, makes use of:
@@ -10,11 +9,13 @@ II) Oled dispay 128x64 96 "
 In the "lib" folder there is a modified version of the "ssd1306" library 
 that allows you to read the single values in float format.
 
-# Installation
+#Installation
 You need the above components.
 Clone the repository and copy it as is to your RPi Pico and launch the "main.py" file.
+Put on the I2C0 bus (GPIO 0 and GPIO 1) an oled display and the bme280 sensor; 
+on the I2C1 bus (GPIO2 and GPIO3) the other oled display.
 
-# Future updates
+#Future updates
 I'll upload a circuit diagram.
 I'll document the code.
-Maybe I'll add new features
+Maybe I'll add new features.
