@@ -6,7 +6,7 @@ Software for the Raspberry Pi Pico, makes use of:
 I) BME280 sensor
 II) Oled dispay 128x64 96 "
 
-In the "lib" folder there is a modified version of the "ssd1306" library 
+In the "lib" folder there is a modified version of the "bme280" library 
 that allows you to read the single values in float format.
 
 # Installation
