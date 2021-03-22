@@ -212,5 +212,24 @@ class BME280:
     @property
     def temperature(self):
         t, p, h = self.read_compensated_data()
-        return t / 100
+        t = t / 100
+        tstr = str(t)
+        tstr = tstr[:len(tstr) - 1]
+        return float(tstr)
         
+    @property
+    def pressure(self):
+        t, p, h = self.read_compensated_data()
+        p = p // 256 + 9000
+        pi = p / 100
+        pstr = str(pi)
+        pstr = pstr[: len(pstr)-1]
+        return float(pstr)
+    
+    @property
+    def humidity(self):
+        t, p, h = self.read_compensated_data()
+        ihstr = str(h // 1024)
+        dhstr = str(h % 1024)
+        hstr = "{}.{}".format(ihstr, dhstr[:1])
+        return float(hstr)
