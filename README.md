@@ -18,6 +18,6 @@ on the I2C1 bus (GPIO2 and GPIO3) the other oled display.
 Clone the repository and copy it as is to your RPi Pico and launch the "main.py" file.
 
 # Future updates
-I'll upload a circuit diagram.\n
+I'll upload a circuit diagram.
 I'll document the code.
 Maybe I'll add new features.
