@@ -4,9 +4,9 @@ from time import sleep
 import oled
 import filemanager
 
-t_filename = "temperature"
-h_filename = "humidity"
-p_filename = "pressure"
+t_filename = "data/temperature"
+h_filename = "data/humidity"
+p_filename = "data/pressure"
 
 WIDTH  = 128
 HEIGTH = 64
@@ -20,6 +20,9 @@ oled1 = oled.Snapshot(WIDTH, HEIGTH, i2c1)
 oled0.temp_chart()
 
 oled1.print_name("Weather Pico")
-oled1.temperature(15.3)
-oled1.pressure(1014.2)
-oled1.humidity(45.6)
+oled1.print_temperature(15.3)
+oled1.print_pressure(1014.2)
+oled1.print_humidity(45.6)
+
+file = filemanager.Filemanager(filename = t_filename)
+file.write(1, 3)
