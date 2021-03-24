@@ -25,9 +25,9 @@ oled1 = oled.Snapshot(WIDTH, HEIGTH, i2c1)
 sensor = BME280(i2c = i2c0)
 
 #DATA TUPLES FOR CHARTS "(FILE_PATH, MIN_XCOORD, MAX_XCOORD)"
-tdata = ("data/temperature", 17, 128)
-hdata = ("data/humidity", 25, 128)
-pdata = ("data/pressure", 33, 128)
+tdata = ("data/temperature", 18, 128)
+hdata = ("data/humidity", 26, 128)
+pdata = ("data/pressure", 34, 128)
 
 #FILES MANAGER OBJS INIT 
 tfile = filemanager.Filemanager(tdata[0])
@@ -65,7 +65,7 @@ def logo():
 
 def app_name():
     oled1.print_name("Pico Weather")
-
+    
 #This function below print the snapshot of the bme280 sensor on oled1
 def sensor_snapshot():
     temp = sensor.temperature
@@ -121,7 +121,7 @@ def main():
         temp_value, hum_value, press_value = sensor_snapshot()
         
         #If 50 seconds have elapsed, change the value of the next element to the first True of the semaphore array
-        if (sec1 - sec0) >= 10:
+        if (sec1 - sec0) >= 45:
             sec0 = sec1
             ticket = ticket % 3
             mutex[ticket] = True
@@ -152,6 +152,9 @@ def main():
                 hfile.erase()
             
         if mutex[2]:
+            if hfiledata != None and len(hfiledata) > 0:
+                h_ycoord = 60 - ((26 * hum_value) // 50)
+                oled0.humidity_image(hfiledata[-1], h_ycoord)
             mutex[2] = False
             pfiledata = pfile.read()
             pressure_chart(pfiledata, press_value, p_xcoord)
