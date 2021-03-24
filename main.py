@@ -130,6 +130,7 @@ def main():
         if mutex[0]:
             #If there are records, it prints the relative image of the previous graph
             if pfiledata != None and len(pfiledata) != 0:
+                pfiledata = pfile.read()
                 oled0.pressure_image(pfiledata[-1])
             mutex[0] = False
             tfiledata = tfile.read()
@@ -141,6 +142,7 @@ def main():
         
         if mutex[1]:
             if tfiledata != None and len(tfiledata) > 1:
+                tfiledata = tfile.read()
                 oled0.temperature_image(tfiledata[-2], tfiledata[-1])
             mutex[1] = False
             hfiledata = hfile.read()
