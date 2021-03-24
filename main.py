@@ -121,7 +121,7 @@ def main():
         temp_value, hum_value, press_value = sensor_snapshot()
         
         #If 50 seconds have elapsed, change the value of the next element to the first True of the semaphore array
-        if (sec1 - sec0) >= 50:
+        if (sec1 - sec0) >= 10:
             sec0 = sec1
             ticket = ticket % 3
             mutex[ticket] = True
@@ -130,7 +130,6 @@ def main():
         if mutex[0]:
             #If there are records, it prints the relative image of the previous graph
             if pfiledata != None and len(pfiledata) != 0:
-                pfiledata = pfile.read()
                 oled0.pressure_image(pfiledata[-1])
             mutex[0] = False
             tfiledata = tfile.read()
@@ -141,9 +140,9 @@ def main():
                 tfile.erase()
         
         if mutex[1]:
-            if tfiledata != None and len(tfiledata) > 1:
-                tfiledata = tfile.read()
-                oled0.temperature_image(tfiledata[-2], tfiledata[-1])
+            if tfiledata != None and len(tfiledata) > 0:
+                t_ycoord = 60 - ((26 * temp_value) // 20)
+                oled0.temperature_image(tfiledata[-1], t_ycoord)
             mutex[1] = False
             hfiledata = hfile.read()
             humidity_chart(hfiledata, hum_value, h_xcoord)

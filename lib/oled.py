@@ -171,13 +171,13 @@ class Charts_and_Images(Oled):
 
     def temperature_image(self, secondlast_value, last_value):
         self.clear()
-        if (last_value[1] - secondlast_value[1]) < 0:
+        if (last_value - secondlast_value[1]) < 0:
             self.oled.text("Temperature:", 34, 0)
             self.oled.text("increasing", 40, 10)
             self.image(thermometer, 0, 0)
             self.pixel_on(positive_arrow)
             
-        elif (last_value[1] - secondlast_value[1]) == 0:
+        elif (last_value - secondlast_value[1]) == 0:
             self.oled.text("Temperature:", 34, 0)
             self.oled.text("stable", 56, 10)
             self.image(thermometer, 0, 0)
