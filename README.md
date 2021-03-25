@@ -8,7 +8,7 @@ Software for the Raspberry Pi Pico, makes use of:
 In the "lib" folder there is a modified version of the "bme280" library that allows you to read the single values in float format.
 
 ![alt text](img/calibration.png "pico-weather_diagram")
-> In the previous image, the content of the red rectangle indicates the calibration of the sensor for 700 meters above sea level. Change this value if the sensor detects false pressure.
+> In the previous image, the content of the red rectangle (offset) indicates the calibration of the sensor for 700 meters above sea level. Change this value if the sensor detects false pressure.
 
 # Installation
 * You need the above components.
