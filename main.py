@@ -24,31 +24,15 @@ temperatureFile = filemanager.Filemanager("data/temperature")
 humidityFile    = filemanager.Filemanager("data/humidity")
 pressureFile    = filemanager.Filemanager("data/pressure")
 
-#LOGO IMAGE
-raspy_logo = bytearray(b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00|?\x00\x01\x86@\x80\x01\x01\x80\x80\x01\x11\x88\x80\x01\x05\xa0\x80\x00\x83\xc1\x00\x00C\xe3\x00\x00~\xfc\x00\x00L'\x00\x00\x9c\x11\x00\x00\xbf\xfd\x00\x00\xe1\x87\x00\x01\xc1\x83\x80\x02A\x82@\x02A\x82@\x02\xc1\xc2@\x02\xf6>\xc0\x01\xfc=\x80\x01\x18\x18\x80\x01\x88\x10\x80\x00\x8c!\x00\x00\x87\xf1\x00\x00\x7f\xf6\x00\x008\x1c\x00\x00\x0c \x00\x00\x03\xc0\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00")
-raspi      = framebuf.FrameBuffer(raspy_logo, 32, 32, framebuf.MONO_HLSB)
-
 
 #*********LOGO FUNCTION*********#
 
-#Print on oled1 infos, on oled0 a bouncing rasperry logo about 7 seconds
+#Print on oled1 infos, on oled0 a raspberry logo about 5 secs 
 def logo():
-    oled0.frame(0, 0, 128, 64, 1)
     oled1.frame(0, 0, 128, 64, 1)
+    oled1.frame(1, 1, 126, 62, 1)
     oled1.threewords("Pico Weather", "BOOTING", "(maybe)")
-    dx = 1
-    dy = 1
-    x = 1
-    y = 1
-    for loop in range(705):
-        oled0.image(raspi, x, y)
-        x = x + dx
-        y = y + dy
-        if (x == 95) or (x == 1):
-            dx = dx * -1
-        if (y == 31) or (y == 1):
-            dy = dy * -1
-    oled0.clear()
+    oled0.xtransl_logo()
     oled1.clear()
     
 #************FUNCTIONS**************#
@@ -106,7 +90,7 @@ def main():
         temp_value, hum_value, press_value = sensor_snapshot()
         
         #If 120 seconds have elapsed, change the value of the next element to the first True of the semaphore array
-        if (sec1 - sec0) >= 10:
+        if (sec1 - sec0) >= 120:
             sec0 = sec1
             ticket = ticket % 3
             mutex[ticket] = True
@@ -137,7 +121,7 @@ def main():
             p_xcoord += 1
             mutex[2] = False
         
-        sleep(10)
+        sleep(20)
 
 logo()
 app_name()
